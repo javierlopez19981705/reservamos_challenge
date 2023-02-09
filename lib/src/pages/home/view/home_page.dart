@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reservamos_challenge/src/pages/home/view/widgets/header_results.dart';
+import 'package:reservamos_challenge/src/utils/utils_widgets.dart';
+import 'package:sliver_tools/sliver_tools.dart';
+
 import 'package:reservamos_challenge/src/pages/home/cubit/home_cubit.dart';
 import 'package:reservamos_challenge/src/pages/home/view/widgets/list_results.dart';
-import 'package:reservamos_repository/reservamos_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(
-        context.read<ReservamosRepository>(),
-      )..getPlaces(),
-      child: const HomeView(),
-    );
+    return const HomeView();
   }
 }
 
@@ -31,11 +29,36 @@ class HomeView extends StatelessWidget {
             case HomeStatus.loading:
               return const Center(child: CircularProgressIndicator());
             case HomeStatus.sucess:
-              return ListResults(places: state.places);
+              return _body(state: state);
             case HomeStatus.error:
-              return const Center(child: Text('HA OCURRIDO UN ERRO'));
+              return const Center(child: Text('HA OCURRIDO UN ERROR'));
           }
         },
+      ),
+    );
+  }
+
+  Widget _body({required HomeState state}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          MultiSliver(
+            children: const [
+              HeaderResult(),
+            ],
+          ),
+          SliverPinnedHeader(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [const Text('Ubicaciones populares'), spaceVertical()],
+            ),
+          ),
+          SliverClip(
+            child: ListResults(places: state.places),
+          ),
+        ],
       ),
     );
   }

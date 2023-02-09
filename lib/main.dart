@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<HomeCubit>(
             create: (context) => HomeCubit(
               context.read<ReservamosRepository>(),
-            ),
+            )..getPlaces(),
           ),
         ],
         child: MaterialApp(

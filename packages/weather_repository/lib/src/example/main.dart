@@ -1,11 +1,11 @@
-import 'package:weather_repository/weather_repository.dart';
-import 'package:weather_service/weather_service.dart';
+// import 'package:weather_repository/weather_repository.dart';
 
-void main() async {
-  WeatherRepository service = WeatherRepository();
-  final data = await service.getWeather(
-    lat: '20.66230215178363',
-    lon: '-103.3447069232788',
-  );
-  print(data);
-}
+// void main() async {
+//   WeatherRepository service = WeatherRepository();
+//   final data = await service.getWeather(
+//     lat: '25.6866142',
+//     lon: '-100.3161126',
+//   );
+
+//   print(data);
+// }

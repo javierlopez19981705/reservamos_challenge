@@ -30,10 +30,14 @@ class WeatherModel {
         timezone: json['timezone'] as String,
         timezoneOffset: json['timezone_offset'] as int,
         daily: List<Daily>.from(
-          (json['daily'] as List<Map<String, dynamic>>).map(Daily.fromJson),
+          (json['daily'] as List<dynamic>).map(
+            (element) => Daily.fromJson(element as Map<String, dynamic>),
+          ),
         ),
         alerts: List<Alert>.from(
-          (json['alerts'] as List<Map<String, dynamic>>).map(Alert.fromJson),
+          ((json['alerts'] ?? <dynamic>[]) as List<dynamic>).map(
+            (element) => Alert.fromJson(element as Map<String, dynamic>),
+          ),
         ),
       );
 
@@ -53,7 +57,7 @@ class WeatherModel {
   List<Daily> daily;
 
   ///
-  List<Alert> alerts;
+  List<Alert>? alerts;
 
   ///
   Map<String, dynamic> toJson() => {
@@ -62,7 +66,8 @@ class WeatherModel {
         'timezone': timezone,
         'timezone_offset': timezoneOffset,
         'daily': List<dynamic>.from(daily.map((x) => x.toJson())),
-        'alerts': List<dynamic>.from(alerts.map((x) => x.toJson())),
+        'alerts':
+            List<dynamic>.from(alerts ?? <Alert>[].map((x) => x.toJson())),
       };
 }
 
@@ -146,30 +151,30 @@ class Daily {
 
   ///
   factory Daily.fromJson(Map<String, dynamic> json) => Daily(
-        dt: json['dt'] as int,
+        dt: (json['dt'] as int) * 1000,
         sunrise: json['sunrise'] as int,
         sunset: json['sunset'] as int,
         moonrise: json['moonrise'] as int,
         moonset: json['moonset'] as int,
-        moonPhase: json['moon_phase'] as double,
+        moonPhase: double.parse('${json['moon_phase']}'),
         temp: Temp.fromJson(json['temp'] as Map<String, dynamic>),
         feelsLike:
             FeelsLike.fromJson(json['feels_like'] as Map<String, dynamic>),
         pressure: json['pressure'] as int,
         humidity: json['humidity'] as int,
-        dewPoint: json['dew_point'] as double,
-        windSpeed: json['wind_speed'] as double,
+        dewPoint: double.parse('${json['dew_point']}'),
+        windSpeed: double.parse('${json['wind_speed']}'),
         windDeg: json['wind_deg'] as int,
-        windGust: json['wind_gust'] as double,
+        windGust: double.parse('${json['wind_gust']}'),
         weather: List<Weather>.from(
-          (json['weather'] as List<Map<String, dynamic>>).map(
-            Weather.fromJson,
+          (json['weather'] as List<dynamic>).map(
+            (element) => Weather.fromJson(element as Map<String, dynamic>),
           ),
         ),
         clouds: json['clouds'] as int,
-        pop: json['pop'] as double,
-        uvi: json['uvi'] as double,
-        rain: json['rain'] as double?,
+        pop: double.parse('${json['pop']}'),
+        uvi: double.parse('${json['uvi']}'),
+        rain: double.tryParse('${json['rain']}'),
       );
 
   ///

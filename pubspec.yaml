@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.2
   bloc: ^8.1.1
+  sliver_tools: ^0.2.9
 
   reservamos_repository:
     path: "packages/reservamos_repository"

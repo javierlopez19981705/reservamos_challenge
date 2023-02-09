@@ -14,7 +14,7 @@ class WeatherService {
 
   final http.Client _httpClient;
   final String _baseUrl = 'api.openweathermap.org';
-  final _apiKey = 'a5a47c18197737e8eeca634cd6acb581';
+  final _apiKey = '61f116a832a497302bcbf933b0172bd6';
 
   ///
   Future<Map<String, dynamic>> fetchWeather({
@@ -27,6 +27,7 @@ class WeatherService {
       'lat': lat,
       'lon': lon,
       'exclude': 'current,minutely,hourly',
+      'units': 'metric',
       'appid': _apiKey,
     };
 
@@ -34,7 +35,6 @@ class WeatherService {
     dynamic body;
 
     final uri = Uri.https(_baseUrl, endPoint, parameters);
-    print(uri.toString());
     try {
       response = await _httpClient.get(uri);
     } on Exception {

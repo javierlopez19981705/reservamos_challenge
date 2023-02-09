@@ -19,8 +19,10 @@ class ReservamosRepository {
   final WeatherRepository _weatherRepository;
 
   ///
-  Future<List<PlaceModel>> getPlaces({bool getWeather = false}) async {
-    final data = await _reservamosService.fetchPlaces();
+  Future<List<PlaceModel>> getPlaces({
+    String? query,
+  }) async {
+    final data = await _reservamosService.fetchPlaces(q: query);
 
     try {
       final places = data
@@ -28,11 +30,6 @@ class ReservamosRepository {
           .where((element) => element.lat != null && element.long != null)
           .toList();
 
-      if (getWeather) {
-        for (final place in places) {
-          await _getWeather(place: place);
-        }
-      }
       return places;
     } catch (e) {
       throw Exception();
@@ -43,7 +40,6 @@ class ReservamosRepository {
   Future<List<PlaceModel>> getPlacesFrom({
     required String query,
     required PlaceModel from,
-    bool getWeather = false,
   }) async {
     final data =
         await _reservamosService.fetchPlaces(q: query, from: from.slug);
@@ -52,11 +48,7 @@ class ReservamosRepository {
           .map(PlaceModel.fromJson)
           .where((element) => element.lat != null && element.long != null)
           .toList();
-      if (getWeather) {
-        for (final place in places) {
-          await _getWeather(place: place);
-        }
-      }
+
       return places;
     } catch (e) {
       throw Exception();
@@ -80,14 +72,13 @@ class ReservamosRepository {
     }
   }
 
-  Future<void> _getWeather({required PlaceModel place}) async {
+  ///
+  Future<void> getWeatherF({required PlaceModel place}) async {
     try {
       final weather = await _weatherRepository.getWeather(
         lat: place.lat!,
         lon: place.long!,
       );
-
-      print(weather.timezone);
 
       place.weather = weather;
     } catch (_) {

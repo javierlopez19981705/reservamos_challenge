@@ -1,3 +1,5 @@
+import 'package:weather_repository/weather_repository.dart';
+
 ///
 class PlaceModel {
   ///
@@ -79,6 +81,9 @@ class PlaceModel {
 
   ///
   double? sortCriteria;
+
+  ///
+  WeatherModel? weather;
 
   ///
   Map<String, dynamic> toJson() => {

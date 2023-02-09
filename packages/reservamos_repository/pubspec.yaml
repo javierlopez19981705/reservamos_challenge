@@ -13,6 +13,8 @@ dependencies:
   
   reservamos_service:
     path: "../reservamos_service"
+  weather_repository:
+    path: "../weather_repository"
 
 dev_dependencies:
   flutter_test:

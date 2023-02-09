@@ -53,12 +53,6 @@ class ReservamosService {
     }
 
     try {
-      body = jsonDecode(response.body) as List;
-    } on Exception {
-      throw JsonDecodeException();
-    }
-
-    try {
       return body.map((element) {
         return element as Map<String, dynamic>;
       }).toList();

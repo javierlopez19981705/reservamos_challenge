@@ -1,4 +1,4 @@
-name: weather_service
+name: weather_repository
 description: A Very Good Project created by Very Good CLI.
 version: 0.1.0+1
 publish_to: none
@@ -10,8 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
-  http: ^0.13.5
+
+  weather_service:
+    path: "../weather_service"
 
 dev_dependencies:
   flutter_test:

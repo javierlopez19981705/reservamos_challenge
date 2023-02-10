@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reservamos_challenge/src/utils/navigation_pages.dart';
 import 'package:reservamos_challenge/src/utils/utils_widgets.dart';
+import 'package:reservamos_challenge/src/utils/labels.dart';
 
 import '../../../../widgets/custom_text_form_field.dart';
 import '../../cubit/home_cubit.dart';
@@ -22,43 +23,52 @@ class HeaderResultsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // spaceVertical(),
-            // _fieldFrom(context: context),
-            CustomTextFormField(
-              label: 'Origen',
-              controller: context.read<HomeCubit>().fromController,
-              icon: Icons.place,
-              textEnd: 'Limpiar',
-              onlyRead: true,
-              onTap: () {
-                NavigationPages.searchPlaces(context: context);
-              },
-              onTapEnd: () {
-                context.read<HomeCubit>().unselectFrom();
-              },
-            ),
-            spaceVertical(),
-            CustomTextFormField(
-              label: 'Destino',
-              controller: context.read<HomeCubit>().toController,
-              icon: Icons.place,
-              textEnd: 'Limpiar',
-              onlyRead: true,
-              onTap: () {
-                NavigationPages.searchPlaces(context: context, isFrom: false);
-              },
-              onTapEnd: () {
-                context.read<HomeCubit>().unselectTo();
-              },
-            ),
-            ElevatedButton(
-              onPressed: state.from != null && state.to != null ? () {} : null,
-              child: const Text('Buscar'),
-            )
-          ],
+        return Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomTextFormField(
+                label: Labels.originLabel,
+                controller: context.read<HomeCubit>().fromController,
+                icon: Icons.place,
+                textEnd: 'Limpiar',
+                onlyRead: true,
+                onTap: () {
+                  NavigationPages.searchPlaces(context: context);
+                },
+                onTapEnd: () {
+                  context.read<HomeCubit>().unselectFrom();
+                },
+              ),
+              spaceVertical(),
+              CustomTextFormField(
+                label: Labels.destinyLabel,
+                controller: context.read<HomeCubit>().toController,
+                icon: Icons.place,
+                textEnd: 'Limpiar',
+                onlyRead: true,
+                onTap: () {
+                  NavigationPages.searchPlaces(context: context, isFrom: false);
+                },
+                onTapEnd: () {
+                  context.read<HomeCubit>().unselectTo();
+                },
+              ),
+              ElevatedButton(
+                onPressed: state.from != null && state.to != null
+                    ? () {
+                        NavigationPages.weatherPage(
+                          context: context,
+                          from: state.from!,
+                          to: state.to!,
+                        );
+                      }
+                    : null,
+                child: const Text(Labels.searchLabel),
+              )
+            ],
+          ),
         );
       },
     );

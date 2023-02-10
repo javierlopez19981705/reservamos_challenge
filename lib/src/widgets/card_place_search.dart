@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reservamos_challenge/src/pages/home/cubit/home_cubit.dart';
 import 'package:reservamos_challenge/src/utils/utils_widgets.dart';
+import '../utils/labels.dart';
 import 'package:reservamos_challenge/src/widgets/result_type_icon_place.dart';
 import 'package:reservamos_repository/reservamos_repository.dart';
 
 class CardPlaceSearch extends StatelessWidget {
-  CardPlaceSearch({
+  const CardPlaceSearch({
     required this.place,
     required this.isFrom,
     required this.onPressed,
@@ -15,7 +14,7 @@ class CardPlaceSearch extends StatelessWidget {
 
   final PlaceModel place;
   final bool isFrom;
-  void Function() onPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class CardPlaceSearch extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: onPressed,
-              child: Text('Seleccionar'),
+              child: const Text(Labels.selectabel),
             ),
           ],
         ),

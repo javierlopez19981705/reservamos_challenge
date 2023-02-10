@@ -60,7 +60,7 @@ class SearchPlacesView extends StatelessWidget {
               builder: (context, state) {
                 switch (state.searchStatus) {
                   case SearchStatus.init:
-                    return SizedBox();
+                    return const SizedBox();
                   case SearchStatus.loading:
                     return const Center(
                       child: CircularProgressIndicator(),

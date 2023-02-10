@@ -7,6 +7,8 @@ import 'package:sliver_tools/sliver_tools.dart';
 import 'package:reservamos_challenge/src/pages/home/cubit/home_cubit.dart';
 import 'package:reservamos_challenge/src/pages/home/view/widgets/list_results.dart';
 
+import '../../../utils/labels.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -44,15 +46,18 @@ class HomeView extends StatelessWidget {
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          MultiSliver(
-            children: const [
-              HeaderResult(),
-            ],
-          ),
           SliverPinnedHeader(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [const Text('Ubicaciones populares'), spaceVertical()],
+              children: [
+                const HeaderResult(),
+                spaceVertical(),
+                const Text(
+                  Labels.popularLocations,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                spaceVertical(),
+              ],
             ),
           ),
           SliverClip(

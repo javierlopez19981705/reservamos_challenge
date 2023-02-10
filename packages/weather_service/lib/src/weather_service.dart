@@ -14,7 +14,7 @@ class WeatherService {
 
   final http.Client _httpClient;
   final String _baseUrl = 'api.openweathermap.org';
-  final _apiKey = '61f116a832a497302bcbf933b0172bd6';
+  final _apiKey = '537a023fdeee7cc0432adf47a8c158c6';
 
   ///
   Future<Map<String, dynamic>> fetchWeather({
@@ -22,7 +22,7 @@ class WeatherService {
     required String lon,
   }) async {
     /// lat={lat}&lon={lon}&exclude={part}&appid={API key}
-    const endPoint = 'data/2.5/onecall';
+    const endPoint = 'data/3.0/onecall';
     final parameters = {
       'lat': lat,
       'lon': lon,

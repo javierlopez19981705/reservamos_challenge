@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reservamos_challenge/src/pages/home/cubit/home_cubit.dart';
 import 'package:reservamos_challenge/src/pages/home/view/home_page.dart';
 import 'package:reservamos_repository/reservamos_repository.dart';
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.deepPurple,
+            textTheme: GoogleFonts.latoTextTheme(
+              Theme.of(context).textTheme,
+            ),
           ),
           routes: {
             'home': (context) => const HomePage(),

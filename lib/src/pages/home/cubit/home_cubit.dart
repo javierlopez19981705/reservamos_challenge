@@ -29,7 +29,9 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(
       from: place,
     ));
-    fromController.value = TextEditingValue(text: state.from!.display);
+    fromController.value = TextEditingValue(
+      text: '${state.from?.display}, ${state.from?.state}',
+    );
   }
 
   unselectFrom({PlaceModel? place}) {
@@ -41,7 +43,9 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(
       to: place,
     ));
-    toController.value = TextEditingValue(text: state.to!.display);
+    toController.value = TextEditingValue(
+      text: '${state.to?.display}, ${state.to?.state}',
+    );
   }
 
   unselectTo({PlaceModel? place}) {

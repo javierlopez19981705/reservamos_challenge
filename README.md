@@ -1,6 +1,8 @@
 - Clonar repositorio
 - Ejecutar el siguiente commando el la raiz del proyecto "flutter pub get"
-- Correr proyecto "flutter run"
+- Correr proyecto ejecutando el comando "flutter run"
+
+Enlace para descargar un archivo apk : https://drive.google.com/file/d/1-2jhhtMxmiiPjUFIU0Jw6pC0z6DAizjz/view?usp=sharing
 
 Capturas:
 

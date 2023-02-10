@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.deepPurple,
+            primarySwatch: Colors.pink,
             textTheme: GoogleFonts.latoTextTheme(
               Theme.of(context).textTheme,
             ),

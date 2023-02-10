@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus = false,
     this.controller,
     this.enabled = true,
+    this.suffix,
   });
 
   final IconData icon;
@@ -25,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool autofocus;
   final TextEditingController? controller;
   final bool? enabled;
+  final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +50,19 @@ class CustomTextFormField extends StatelessWidget {
         onTap: onTap,
         enabled: enabled,
         onChanged: onChanged,
+        textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
           hintText: label,
           border: InputBorder.none,
           icon: Icon(icon),
-          suffix: GestureDetector(
-            onTap: onTapEnd,
-            child: Text(
-              textEnd,
-              // style: styleDescriptionBold.copyWith(
-              //   color: Theme.of(context).primaryColor,
-              //   fontSize: 16,
-              // ),
+          suffix: CircleAvatar(
+            backgroundColor: Colors.black.withOpacity(.1),
+            radius: 18,
+            child: IconButton(
+              color: Theme.of(context).primaryColor,
+              onPressed: onTapEnd,
+              icon: const Icon(Icons.clear),
+              iconSize: 18,
             ),
           ),
           fillColor: Colors.white,

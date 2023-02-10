@@ -37,22 +37,30 @@ class SearchPlacesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           CustomTextFormField(
+            controller: textController,
             icon: Icons.place,
             textEnd: '',
             label: 'Busca un destino',
+            autofocus: true,
             onChanged: (val) => _onSearchDebouncer.debounce(
               () {
-                context.read<HomeCubit>().initSearch(
-                      query: val,
-                      isFrom: isFrom,
-                    );
+                if (val.length >= 2) {
+                  context.read<HomeCubit>().initSearch(
+                        query: val,
+                        isFrom: isFrom,
+                      );
+                }
               },
             ),
+            onTapEnd: () {
+              textController.clear();
+            },
           ),
           spaceVertical(),
           Expanded(
@@ -66,23 +74,26 @@ class SearchPlacesView extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   case SearchStatus.sucess:
-                    return ListView.separated(
-                      itemBuilder: (context, index) {
-                        final place = state.search[index];
-                        return CardPlaceSearch(
-                          place: place,
-                          isFrom: isFrom,
-                          onPressed: () {
-                            context.read<HomeCubit>().placeSelectSearch(
-                                place: place, isFrom: isFrom);
-                            Navigator.pop(context);
-                          },
-                        );
-                      },
-                      separatorBuilder: (context, index) => spaceVertical(),
-                      itemCount: state.search.length,
-                      physics: const BouncingScrollPhysics(),
-                    );
+                    return state.search.isEmpty
+                        ? const Text('Sin resultados')
+                        : ListView.separated(
+                            itemBuilder: (context, index) {
+                              final place = state.search[index];
+                              return CardPlaceSearch(
+                                place: place,
+                                isFrom: isFrom,
+                                onPressed: () {
+                                  context.read<HomeCubit>().placeSelectSearch(
+                                      place: place, isFrom: isFrom);
+                                  Navigator.pop(context);
+                                },
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                spaceVertical(),
+                            itemCount: state.search.length,
+                            physics: const BouncingScrollPhysics(),
+                          );
                   case SearchStatus.error:
                     return const Text('HA OCURRIDO UN ERROR');
                 }

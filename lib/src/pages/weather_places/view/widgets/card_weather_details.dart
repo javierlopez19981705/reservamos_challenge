@@ -23,7 +23,11 @@ class CardWeatherDetails extends StatelessWidget {
             children: [
               _day(),
               spaceVertical(),
-              Text(place.display),
+              Text(
+                place.display,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
               spaceVertical(),
               _componentInformation(
                 icon: Icons.thermostat,

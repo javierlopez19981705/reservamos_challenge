@@ -57,8 +57,7 @@ class CardWeatherPlace extends StatelessWidget {
     return Text(
       place.display,
       style: const TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
+        fontSize: 20,
         overflow: TextOverflow.ellipsis,
       ),
     );
